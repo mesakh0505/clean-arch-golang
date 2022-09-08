@@ -159,6 +159,10 @@ TODO(LieAlbertTriAdrian)
 - [ ] Add grpc gateway
 - [ ] Add watchmode - debugger vscode
 - [ ] Add deployment
+- [ ] Integrate openAPI validation
+- [ ] Add graphql
+- [ ] Fix and check for typos in documentation
+- [ ] Add nix-shell
 
 ## References
 - https://medium.com/yemeksepeti-teknoloji/mocking-an-interface-using-mockery-in-go-afbcb83cc773
