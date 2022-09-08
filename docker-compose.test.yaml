@@ -1,0 +1,39 @@
+# Reason why stick to V2 not V3
+# https://github.com/peter-evans/docker-compose-healthcheck/issues/3#issuecomment-329037485
+version: "2.3"
+networks:
+  integration-tests:
+    driver: bridge
+
+services:
+  api_test:
+      build:
+        context: .
+        dockerfile: ./test.Dockerfile
+      networks:
+        - integration-tests
+      environment:
+        POSTGRES_TEST_URL: "user=postgres password=password dbname=testing host=postgres-test port=5432 sslmode=disable"
+      volumes:
+        - $PWD:/go_modules/LieAlbertTriAdrian/todo-service
+      # NOTES: This features only available in V2. 
+      # https://github.com/peter-evans/docker-compose-healthcheck/issues/3#issuecomment-329037485
+      depends_on:
+        postgres-test:
+          condition: service_healthy
+  postgres-test:
+    image: postgres:11.4-alpine
+    container_name: todo-service-postgres-test
+    ports:
+      - 54320:5432
+    environment:
+      POSTGRES_DB: testing
+      POSTGRES_PASSWORD: password
+    networks:
+        - integration-tests
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      

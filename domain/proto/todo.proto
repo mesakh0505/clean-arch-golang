@@ -1,0 +1,26 @@
+syntax = "proto3";
+package todo;
+
+option go_package = ".;proto";
+
+service TodoRpc {
+  // GetUsers
+  rpc FetchTodos(EmptyReq) returns (FetchTodosResponse) {};
+}
+
+// EmptyReq message
+message EmptyReq {}
+
+// GetUsersResponse message
+message FetchTodosResponse {
+  // User message
+  repeated Todo todos = 1;
+}
+
+// Todo message
+message Todo {
+  string id = 1;
+  string message = 2;
+  string status = 3;
+  string createdAt = 4;
+}

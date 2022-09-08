@@ -1,0 +1,12 @@
+titleAndCommits: true
+commitsOnly: false
+titleOnly: false
+anyCommit: false
+allowMergeCommits: true
+allowRevertCommits: true
+types:
+  - feat
+  - fix
+  - refactor
+  - chore
+  - docs
